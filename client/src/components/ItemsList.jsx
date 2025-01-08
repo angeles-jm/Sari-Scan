@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { MdDelete, MdShoppingBag } from "react-icons/md";
 
 const ItemsList = ({ productsList, searchQuery, onDeleteProduct }) => {

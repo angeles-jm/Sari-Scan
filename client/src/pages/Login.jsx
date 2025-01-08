@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { RiLockPasswordLine, RiMailAiLine } from "react-icons/ri";
 import { IoPersonOutline } from "react-icons/io5";
