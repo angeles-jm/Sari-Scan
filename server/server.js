@@ -26,13 +26,17 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"], // Specify the allowed origin
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://sari-scan.onrender.com/",
+    ], // Specify the allowed origin
     credentials: true, // Allow credentials (cookies, headers)
   })
 );
 
 // Define Routes
-app.get("/", (req, res) => res.send("<b>API WORKING</b>"));
+// app.get("/", (req, res) => res.send("<b>API WORKING</b>"));
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRouter);
 app.use("/api/products", productRoutes);
