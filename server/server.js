@@ -46,12 +46,11 @@ mongoose
     console.log("Error Connecting", err.message);
   });
 
-// Serve static files for simulations
+// Serve static files
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// Catch-all route
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
 });
 
 // Start server
