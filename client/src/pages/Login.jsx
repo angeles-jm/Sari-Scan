@@ -24,7 +24,7 @@ const Login = () => {
 
       if (state === "Login") {
         const response = await axios.post(
-          `http://localhost:3000/api/auth/login`,
+          `${backendUrl}/api/auth/login`,
           formData
         );
         console.log(response.data);
@@ -43,7 +43,7 @@ const Login = () => {
           `${backendUrl}/api/auth/register`,
           formData
         );
-
+        console.log(response.data);
         if (response.data.success) {
           setIsLoggedIn(true);
           getUserData();
@@ -56,11 +56,12 @@ const Login = () => {
     } catch (error) {
       if (error) {
         toast.error(error.response.data.message);
-        console.error(error);
+        console.error(error.response.data);
       }
     }
   };
 
+  console.log(formData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });

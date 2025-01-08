@@ -14,6 +14,7 @@ const { JWT_SECRET, NODE_ENV, SENDER_EMAIL } = process.env;
 
 // Register
 export const registerUser = async (req, res) => {
+  console.log(req.body);
   const { name, email, password } = req.body;
 
   try {

@@ -19,15 +19,21 @@ const __dirname = path.dirname(__filename);
 
 const { MONGODB_URI, PORT } = process.env;
 
+console.log(MONGODB_URI);
 const app = express();
 app.use(cookieParser());
+app.use(express.json());
 
 // Middleware
 const allowedOrigins = [
   "https://sari-scan.onrender.com",
   "http://localhost:3000",
-  "https://sari-scan.onrender.com",
+  "http://localhost:5173",
 ];
+
+// Middleware to parse URL-encoded bodies
+// app.use(express.urlencoded({ extended: true }));
+
 app.use(
   cors({
     origin: (origin, callback) => {
