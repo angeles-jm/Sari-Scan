@@ -5,13 +5,17 @@ import cookieParser from "cookie-parser";
 
 // dotenv
 import dotenv from "dotenv";
-
-dotenv.config();
+dotenv.config({ path: "./server/.env" });
 
 // Routes
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const { MONGODB_URI, PORT } = process.env;
 
@@ -22,7 +26,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Specify the allowed origin
+    origin: ["http://localhost:5173", "http://localhost:3000"], // Specify the allowed origin
     credentials: true, // Allow credentials (cookies, headers)
   })
 );
@@ -41,6 +45,14 @@ mongoose
   .catch((err) => {
     console.log("Error Connecting", err.message);
   });
+
+// Serve static files for simulations
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// Catch-all route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
 
 // Start server
 

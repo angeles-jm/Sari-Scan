@@ -8,7 +8,7 @@ import {
   PASSWORD_RESET_TEMPLATE,
 } from "../config/emailTemplates.js";
 
-dotenv.config();
+dotenv.config({ path: "./server/.env" });
 
 const { JWT_SECRET, NODE_ENV, SENDER_EMAIL } = process.env;
 
