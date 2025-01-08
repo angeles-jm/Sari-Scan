@@ -23,15 +23,22 @@ const app = express();
 app.use(cookieParser());
 
 // Middleware
-app.use(express.json());
+const allowedOrigins = [
+  "https://sari-scan.onrender.com",
+  "http://localhost:3000",
+  "https://sari-scan.onrender.com",
+];
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:3000",
-      "https://sari-scan.onrender.com/",
-    ], // Specify the allowed origin
-    credentials: true, // Allow credentials (cookies, headers)
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 
