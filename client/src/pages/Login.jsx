@@ -69,12 +69,6 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 sm:px-0 bg-gray-100">
-      <img
-        src={assets.logo}
-        onClick={() => navigate("/")}
-        alt=""
-        className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
-      />
       <div className="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm">
         <h2 className="text-3xl font-semibold text-gray-300 text-center mb-2">
           {state === "Sign Up" ? "Create account" : "Login"}

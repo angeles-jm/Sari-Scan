@@ -1,8 +1,15 @@
 import axios from "axios";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { MdDelete, MdShoppingBag } from "react-icons/md";
+import ImageLoading from "./ImageLoading";
 
 const ItemsList = ({ productsList, searchQuery, onDeleteProduct }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    !productsList ? setIsLoading(true) : setIsLoading(false);
+  }, [productsList]);
+
   const filteredProducts = useMemo(() => {
     if (!Array.isArray(productsList)) return [];
     if (!searchQuery) return productsList;
@@ -21,6 +28,16 @@ const ItemsList = ({ productsList, searchQuery, onDeleteProduct }) => {
     });
   }, [productsList, searchQuery]);
 
+  // Handle Loading state
+  if (isLoading) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-gray-500 text-lg">Loading products...</p>
+      </div>
+    );
+  }
+
+  // If
   if (!Array.isArray(productsList)) {
     return (
       <div className="text-center py-8">
@@ -33,9 +50,7 @@ const ItemsList = ({ productsList, searchQuery, onDeleteProduct }) => {
     return (
       <div className="text-center py-8">
         <p className="text-gray-500 text-lg">
-          {searchQuery
-            ? "No products found matching your search."
-            : "No products available in this store."}
+          {searchQuery && "No products available in this store."}
         </p>
       </div>
     );
@@ -57,13 +72,12 @@ const ItemsList = ({ productsList, searchQuery, onDeleteProduct }) => {
           {console.log(filteredProducts)}
           <div className="flex items-center p-4">
             <div className="flex-shrink-0">
-              <img
+              <ImageLoading
                 src={
                   product?.imageUrl ||
                   "https://via.placeholder.com/150?text=No+Image"
                 }
                 alt={product?.name || "Product"}
-                className="h-20 w-20 object-contain rounded-md"
               />
             </div>
             <div className="ml-4 flex-grow">

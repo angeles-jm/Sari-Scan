@@ -70,7 +70,7 @@ const Navbar = () => {
   return (
     <div className="w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 bg-gray-100 ">
       <span
-        className="text-lg font-medium cursor-pointer"
+        className="hidden md:block text-lg font-medium cursor-pointer"
         onClick={() => navigate("/")}
       >
         SariScan
@@ -83,7 +83,7 @@ const Navbar = () => {
                 to={item.link}
                 key={item.id}
                 className={({ isActive }) =>
-                  `flex items-center rounded-lg gap-2 px-4 py-2 transition-colors duration-300  ${
+                  `flex items-center rounded-lg gap-2 px-4 py-2 mx-2 transition-colors duration-300  ${
                     isActive
                       ? " text-black bg-gray-200"
                       : "  hover:bg-emerald-600 hover:text-white"

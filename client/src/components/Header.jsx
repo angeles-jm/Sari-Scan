@@ -9,7 +9,7 @@ const Header = () => {
   const { userData } = useContext(AppContext);
 
   return (
-    <div className="flex flex-col items-center mt-20 text-center tet-gray-800">
+    <div className="flex flex-col items-center mt-20 text-center text-gray-800">
       <img
         src={assets.header_img}
         alt=""
@@ -30,7 +30,7 @@ const Header = () => {
       </p>
 
       <button
-        onClick={() => navigate("/inventory")}
+        onClick={() => (userData ? navigate("/inventory") : navigate("/login"))}
         className="border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 translate-all"
       >
         Get Started
